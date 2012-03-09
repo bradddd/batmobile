@@ -1,0 +1,26 @@
+.user {
+	border-bottom: 3px solid #DBE3EB;
+	margin: 0;
+	overflow: hidden;
+	padding: 15px 35px;
+	background-color: white;:w
+	margin-bottom: 4px;
+	margin-left: 3px;
+}
+
+.avatar {
+	float: left;
+	height: 40px;
+	overflow: hidden;
+	width: 40px;
+}
+.user-name {
+	font-size: 22px;
+	line-height: 40px;
+	margin-bottom: 4px;
+	margin-left: 58px;
+}
+a:link { color: #000000; text-decoration:none }
+a:visited { color: #000000; text-decoration:none }
+a:hover { color: #000000; text-decoration:none }
+a:active { color: #000000; text-decoration:none }
