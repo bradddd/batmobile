@@ -28,15 +28,20 @@ Ext.setup({
        
         var formBase = new Ext.Panel({
 		
-            scroll : 'vertical',
+            //scroll : 'vertical',
             //url    : 'http://batsignal.herokuapp.com/login',
             //standardSubmit : true,
 			//method: 'POST',
+			//scrollable: false,
+			
 			items: [
                 {
-                    xtype: 'fieldset',
+                    padding: '15px',
+					height: '100%',
+					xtype: 'fieldset',
 					id: 'fieldset',
                     title: 'Login',
+					scrollable: false,
                     instructions: 'or go <a href="http://batsignal.herokuapp.com">here</a> to register',
                     defaults: {
                         labelAlign: 'center',
@@ -56,21 +61,29 @@ Ext.setup({
                             text: 'Login',
                             ui: 'confirm',
 							handler: function(){
+							
+								var uname  = Ext.getCmp('username').getValue();
 								Ext.Ajax.request({ 
 									url:'http://batsignal.herokuapp.com/login',
 									method:'POST',
 									params: {
 										password: Ext.getCmp('password').getValue(),
-										username: Ext.getCmp('username').getValue(),
+										username: uname,
 									},
 									failure: function (response) { 
 										alert('failure');
 									},
 									success: function (response, opts) { 
 										//alert('success');
-										load(Ext.getCmp('username').getValue());
-										formBase.destroy();
-										form.destroy();
+										var page = response.responseText;
+										if(page.indexOf('<a href="/users/'+uname+'">') !== -1) {
+											load(uname);
+											formBase.destroy();
+											form.destroy();
+										}
+										else {
+											alert('Login Failed');
+										}
 									},
 								});
 							}
